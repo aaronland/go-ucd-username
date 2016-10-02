@@ -27,7 +27,7 @@ vendor-deps: deps
 	rm -rf src
 
 fmt:
-	go fmt ucd/*.go
+	go fmt *.go
 	go fmt cmd/*.go
 
 bin: 	self
