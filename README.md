@@ -1,6 +1,6 @@
 # go-ucd-username
 
-Generates ASCII URI-safe aliases for Unicode usernames containing non-alphanumeric characters.
+Generates ASCII URL-safe aliases for Unicode usernames containing non-alphanumeric characters.
 
 ## What is this thing?
 
