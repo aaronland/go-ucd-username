@@ -18,9 +18,27 @@ func init() {
 	debug = true
 }
 
-func Username(raw string) (string, error) {
+type UCDUsername struct {
+	username         string
+	AllowSpaces      bool
+	AllowPunctuation bool
+	Debug            bool
+}
 
-	if debug {
+func NewUCDUsername() (*UCDUsername, error) {
+
+	u := UCDUsername{
+		AllowSpaces:      false,
+		AllowPunctuation: false,
+		Debug:            false,
+	}
+
+	return &u, nil
+}
+
+func (u *UCDUsername) Translate(raw string) (string, error) {
+
+	if u.Debug {
 		log.Println("PARSE", raw)
 	}
 
@@ -42,22 +60,22 @@ func Username(raw string) (string, error) {
 
 	for i, r := range safe {
 
-		if debug {
+		if u.Debug {
 			log.Printf("RUNE %d %#U\n", i, r)
 		}
 
-		if unicode.IsSpace(r) {
+		if unicode.IsSpace(r) && !u.AllowSpaces {
 
-			if debug {
+			if u.Debug {
 				log.Printf("RUNE %d %#U is space\tSKIPPING\n", i, r)
 			}
 
 			continue
 		}
 
-		if unicode.IsPunct(r) {
+		if unicode.IsPunct(r) && !u.AllowPunctuation {
 
-			if debug {
+			if u.Debug {
 				log.Printf("RUNE %d %#U is punctuation\tSKIPPING\n", i, r)
 			}
 
@@ -71,7 +89,7 @@ func Username(raw string) (string, error) {
 			continue
 		}
 
-		if debug {
+		if u.Debug {
 			log.Printf("RUNE %d %#U is not whitelisted\tPROCESSING\n", i, r)
 		}
 
@@ -81,13 +99,15 @@ func Username(raw string) (string, error) {
 			return "", errors.New("Totally crazy-pants character!")
 		}
 
-		if debug {
+		if u.Debug {
 			log.Printf("RUNE %d %#U return string '%s'\tPROCESSING\n", i, r, name.Name)
 		}
 
 		for j, r := range name.Name {
 
-			log.Printf("RUNE %d:%d %#U\n", i, j, r)
+			if u.Debug {
+				log.Printf("RUNE %d:%d %#U\n", i, j, r)
+			}
 
 			char = string(r)
 

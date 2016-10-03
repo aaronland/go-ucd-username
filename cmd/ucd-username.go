@@ -11,12 +11,26 @@ import (
 
 func main() {
 
+	var spaces = flag.Bool("spaces", false, "Do not filter out whitespace during processing")
+	var punct = flag.Bool("punct", false, "Do not filter out punctuation during processing")
+	var debug = flag.Bool("debug", false, "Enable verbose logging during processing")
+
 	flag.Parse()
 	args := flag.Args()
 
-	username := strings.Join(args, " ")
+	pretty := strings.Join(args, " ")
 
-	safe, err := ucd.Username(username)
+	username, err := ucd.NewUCDUsername()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	username.Debug = *debug
+	username.AllowSpaces = *spaces
+	username.AllowPunctuation = *punct
+
+	safe, err := username.Translate(pretty)
 
 	if err != nil {
 		log.Fatal(err)

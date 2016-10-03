@@ -1,6 +1,6 @@
 # go-ucd-username
 
-Generates ASCII URI-safe aliases for Unicode usernames containing non-ASCII characters.
+Generates ASCII URI-safe aliases for Unicode usernames containing non-alphanumeric characters.
 
 ## Important
 
@@ -8,9 +8,12 @@ This is work in progress. It should not be considered "production" ready yet.
 
 ## What is this thing?
 
+`go-ucd-username` generates ASCII URI-safe aliases for Unicode usernames containing non-alphanumeric characters by converting them in to ASCII equivalents using the [go-ucd]() package.
+
+
 ### Example
 
-Given the string `mr. 😁 / ../test 🚀 㐖`
+Given the string `mr. 😁 / ../test 🚀 㐖` the following would happen:
 
 ```
 2016/10/03 07:51:15 PARSE mr. 😁 / ../test 🚀 㐖
@@ -128,31 +131,64 @@ All of the dependencies are included in the [vendor](vendor) directory. If you d
 ## Usage
 
 ```
+package main
+
 import (
 	"flag"
-	"fmt"		
-	"log"
+	"fmt"
 	"github.com/thisisaaronland/go-ucd-username"
-	"strings"		
+	"log"
+	"os"
+	"strings"
 )
 
-flag.Parse()
-args := flag.Args()
+func main() {
 
-username := strings.Join(args, " ")
-	
-safe, err := ucd.Username(username)
+	var spaces = flag.Bool("spaces", false, "Do not filter out whitespace during processing")
+	var punct = flag.Bool("punct", false, "Do not filter out punctuation during processing")
+	var debug = flag.Bool("debug", false, "Enable verbose logging during processing")
 
-if err != nil {
-   log.Fatal(err)
+	flag.Parse()
+	args := flag.Args()
+
+	pretty := strings.Join(args, " ")
+
+	username, err := ucd.NewUCDUsername()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	username.Debug = *debug
+	username.AllowSpaces = *spaces
+	username.AllowPunctuation = *punct
+
+	safe, err := username.Translate(pretty)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(safe)
+	os.Exit(0)
 }
-	
-fmt.Println(safe)
 ```
 
 ## Tools
 
 ### ucd-username
+
+```
+Usage of ./bin/ucd-username:
+  -debug
+	Enable verbose logging during processing
+  -punct
+	Do not filter out punctuation during processing
+  -spaces
+	Do not filter out whitespace during processing
+```
+
+For example:
 
 ```
 ./bin/ucd-username mr. 😁
