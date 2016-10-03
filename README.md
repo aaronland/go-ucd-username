@@ -2,14 +2,15 @@
 
 Generates ASCII URI-safe aliases for Unicode usernames containing non-alphanumeric characters.
 
-## Important
-
-This is work in progress. It should not be considered "production" ready yet.
-
 ## What is this thing?
 
-`go-ucd-username` generates ASCII URI-safe aliases for Unicode usernames containing non-alphanumeric characters by converting them in to ASCII equivalents using the [go-ucd]() package.
+`go-ucd-username` generates ASCII URI-safe aliases for Unicode usernames containing non-alphanumeric (plus dashes) characters by converting them in to ASCII equivalents using the [go-ucd](https://github.com/cooperhewitt/go-ucd) package.
 
+Specifically any character that is not `[a-zA-Z0-9\-]` is passed to [go-ucd](https://github.com/cooperhewitt/go-ucd) to determine its equivalent Unicode name string. By default those strings are simple descriptive ASCII English names, but some names in the Unihan dataset contain non-ASCII characters so a final pass to filter out any character that is not `[a-zA-Z0-9\-]` is applied.
+
+By default any whitespace or punctuation characters are ignored entirely but you can toggle these defaults if you choose (at which point they will be processed by [go-ucd](https://github.com/cooperhewitt/go-ucd).
+
+All strings are lower-cased.
 
 ### Example
 
@@ -116,7 +117,7 @@ Given the string `mr. 😁 / ../test 🚀 㐖` the following would happen:
 2016/10/03 07:51:15 RUNE 24:28 U+0041 'A'
 ```
 
-Resulting in the string `mrgrinningfacewithsmilingeyestestrocketanoldnameforindia`
+Resulting in the string `mrgrinningfacewithsmilingeyestestrocketanoldnameforindia`. What you do (or don't do) with that string afterwards is entirely up to you!
 
 ## Install
 
