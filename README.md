@@ -137,7 +137,7 @@ So long as you already have [Go](http://www.golang.org) (and `make`) installed y
 make bin
 ```
 
-All of the dependencies are included in the [vendor](vendor) directory. If you don't have `make` installed you can get started by executin the relevant commands in the [Makefile](Makefile).
+All of the dependencies are included in the [vendor](vendor) directory. If you don't have `make` installed you can get started by executing the relevant commands in the [Makefile](Makefile).
 
 ## Usage
 
