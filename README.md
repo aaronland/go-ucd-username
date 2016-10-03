@@ -125,7 +125,7 @@ Principally so that you can provide meaningful "pretty" URL-safe aliases for use
 
 For example, a user with the name `Admiral🍦` would have the URL alias `/admiralsofticecream`. _If you don't already have users with names like that... you will._
 
-While it's true that an [Internalized Resource Identifier](https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier) (IRI) would allow you to create an equivalent `/Admiral%20🍦` it's still early days for IRIs meaning browser support is uneven and there are a number of [security concerns](http://unicode.org/reports/tr36/) that haven't been fully sorted yet.
+While it's true that an [Internalized Resource Identifier](https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier) (IRI) would allow you to create an equivalent `/Admiral%20🍦` URL (...er, IRI) it's still early days for IRIs meaning browser support is uneven and there are a number of [security concerns](http://unicode.org/reports/tr36/) that haven't been fully sorted yet.
 
 `go-ucd-username` side-steps all those issues and allows for a better-than-nothing alternative.
 
