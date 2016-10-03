@@ -121,9 +121,13 @@ Resulting in the string `mrgrinningfacewithsmilingeyestestrocketanoldnameforindi
 
 ## But... why?
 
-Principally so that you can provide meaningful "pretty" URL-safe aliases for users with full Unicode usernames. For example, a user with the name `Admiral🍦` would have the URL alias `/admiralsofticecream`.
+Principally so that you can provide meaningful "pretty" URL-safe aliases for users with full Unicode usernames.
 
-It's true that an [Internalized Resource Identifier](https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier) (IRI) would allow you to create an equivalent `/Admiral%20🍦` it's still early days for IRIs, support is uneven and there are a number of security concerns that haven't been fully sorted yet. So this just side-steps the issue and allows for a better-than-nothing alternative.
+For example, a user with the name `Admiral🍦` would have the URL alias `/admiralsofticecream`. _If you don't already have users with names like that... you will._
+
+It's true that an [Internalized Resource Identifier](https://en.wikipedia.org/wiki/Internationalized_Resource_Identifier) (IRI) would allow you to create an equivalent `/Admiral%20🍦` it's still early days for IRIs, support is uneven and there are a number of security concerns that haven't been fully sorted yet.
+
+`go-ucd-username` side-steps all those issues and allows for a better-than-nothing alternative.
 
 ## Install
 
