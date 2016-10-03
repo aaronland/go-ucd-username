@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/thisisaaronland/go-ucd-username"
 	"log"
+	"os"
+	"strings"
 )
 
 func main() {
@@ -12,15 +14,14 @@ func main() {
 	flag.Parse()
 	args := flag.Args()
 
-	for _, user := range args {
+	username := strings.Join(args, " ")
 
-		safe, err := ucd.Safe(user)
+	safe, err := ucd.Username(username)
 
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		fmt.Println(user, safe)
+	if err != nil {
+		log.Fatal(err)
 	}
 
+	fmt.Println(safe)
+	os.Exit(0)
 }

@@ -16,7 +16,7 @@ func init() {
 	re_allowed = regexp.MustCompile(`[a-zA-Z0-9\-]`)
 }
 
-func Safe(raw string) (string, error) {
+func Username(raw string) (string, error) {
 
 	opts := sanitize.DefaultOptions()
 
@@ -40,6 +40,10 @@ func Safe(raw string) (string, error) {
 			continue
 		}
 
+		if unicode.IsPunct(r) {
+			continue
+		}
+
 		char := string(r)
 
 		if char == "." {
@@ -53,13 +57,21 @@ func Safe(raw string) (string, error) {
 
 		name := goucd.Name(char)
 
-		chars, err := Safe(name.Name)
+		if name.Name == "" {
+			return "", errors.New("Totally crazy-pants character!")
+		}
+
+		chars, err := Username(name.Name)
 
 		if err != nil {
 			return "", err
 		}
 
 		bits = append(bits, chars)
+	}
+
+	if len(bits) == 0 {
+		return "", errors.New("Nothing left to make a username with")
 	}
 
 	safe = strings.Join(bits, "")
