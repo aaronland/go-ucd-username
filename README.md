@@ -8,7 +8,7 @@ Generates ASCII URI-safe aliases for Unicode usernames containing non-alphanumer
 
 Specifically any character that is not `[a-zA-Z0-9\-]` is passed to [go-ucd](https://github.com/cooperhewitt/go-ucd) to determine its equivalent Unicode name string. By default those strings are simple descriptive ASCII English names, but some names in the Unihan dataset contain non-ASCII characters so a final pass to filter out any character that is not `[a-zA-Z0-9\-]` is applied.
 
-By default any whitespace or punctuation characters are ignored entirely but you can toggle these defaults if you choose (at which point they will be processed by [go-ucd](https://github.com/cooperhewitt/go-ucd).
+By default any whitespace or punctuation characters are ignored entirely but you can toggle these defaults if you choose (at which point they will be processed by [go-ucd](https://github.com/cooperhewitt/go-ucd)).
 
 All strings are lower-cased.
 
