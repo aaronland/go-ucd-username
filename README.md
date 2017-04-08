@@ -233,8 +233,7 @@ For example:
 And then:
 
 ```
-# as in:
-# curl -s -v 'http://localhost:8081?username=mr. 😁'
+# as in: http://localhost:8081?username=mr. 😁
 
 $> curl -s -i 'http://localhost:8081?username=mr.+%F0%9F%98%81'
 HTTP/1.1 200 OK
