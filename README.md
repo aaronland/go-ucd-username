@@ -245,10 +245,6 @@ Date: Sat, 08 Apr 2017 01:02:58 GMT
 mrgrinningfacewithsmilingeyes
 ```
 
-## To do
-
-* Write an `ucd-username-server` HTTP pony
-
 ## See also
 
 * https://github.com/cooperhewitt/go-ucd
