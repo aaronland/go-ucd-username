@@ -206,6 +206,45 @@ For example:
 mrgrinningfacewithsmilingeyes
 ```
 
+### ucd-usernamed
+
+```
+./bin/ucd-usernamed -h
+Usage of ./bin/ucd-usernamed:
+  -debug
+    	Enable verbose logging during processing
+  -host string
+    	What host to bind ucd-usernamed to (default "localhost")
+  -port int
+    	What port to bind ucd-usernamed to (default 8080)
+  -punct
+    	Do not filter out punctuation during processing
+  -spaces
+    	Do not filter out whitespace during processing
+```
+
+For example:
+
+```
+./bin/ucd-usernamed -port 8081
+2017/04/07 18:02:51 listening on localhost:8081
+```
+
+And then:
+
+```
+# as in:
+# curl -s -v 'http://localhost:8081?username=mr. 😁'
+
+$> curl -s -i 'http://localhost:8081?username=mr.+%F0%9F%98%81'
+HTTP/1.1 200 OK
+Content-Length: 29
+Content-Type: text/plain
+Date: Sat, 08 Apr 2017 01:02:58 GMT
+
+mrgrinningfacewithsmilingeyes
+```
+
 ## To do
 
 * Write an `ucd-username-server` HTTP pony

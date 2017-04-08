@@ -18,6 +18,7 @@ build:	fmt bin
 deps:	rmdeps
 	@GOPATH=$(GOPATH) go get -u "github.com/cooperhewitt/go-ucd"
 	@GOPATH=$(GOPATH) go get -u "github.com/whosonfirst/go-sanitize"
+	@GOPATH=$(GOPATH) go get -u "github.com/facebookgo/grace/gracehttp"
 
 vendor-deps: deps
 	if test ! -d vendor; then mkdir vendor; fi
@@ -32,3 +33,4 @@ fmt:
 
 bin: 	self
 	@GOPATH=$(GOPATH) go build -o bin/ucd-username cmd/ucd-username.go
+	@GOPATH=$(GOPATH) go build -o bin/ucd-usernamed cmd/ucd-usernamed.go
