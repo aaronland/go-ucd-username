@@ -252,7 +252,7 @@ docker build -t ucd-username .
 docker run -p 6161:8080 -e HOST='0.0.0.0' ucd-username
 
 curl 'localhost:6161?username=\U+01F937'
-shrug
+[shrug](https://emojipedia.org/shrug/)
 ```
 
 ## See also
