@@ -13,13 +13,10 @@ mrgrinningfacewithsmilingeyes
 import (
 	"flag"
 	"fmt"
-	"github.com/facebookgo/grace/gracehttp"
-	"github.com/thisisaaronland/go-ucd-username"
-	"github.com/whosonfirst/go-sanitize"
+	"github.com/thisisaaronland/go-ucd-username/http"
 	"log"
-	"net/http"
+	gohttp "net/http"
 	"os"
-	"strconv"
 )
 
 func main() {
@@ -33,63 +30,25 @@ func main() {
 
 	flag.Parse()
 
-	handler := func(rsp http.ResponseWriter, req *http.Request) {
+	opts := http.UCDUsernameHandlerOptions{
+		Debug:            *debug,
+		AllowSpaces:      *spaces,
+		AllowPunctuation: *punct,
+	}
 
-		query := req.URL.Query()
-		raw := query.Get("username")
+	handler, err := http.UCDUsernameHandler(opts)
 
-		if raw == "" {
-			http.Error(rsp, "Missing username", http.StatusBadRequest)
-			return
-		}
-
-		opts := sanitize.DefaultOptions()
-
-		scrubbed, err := sanitize.SanitizeString(raw, opts)
-
-		if err != nil {
-			http.Error(rsp, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		if scrubbed == "" {
-			http.Error(rsp, "Invalid username", http.StatusBadRequest)
-			return
-		}
-
-		username, err := ucd.NewUCDUsername()
-
-		if err != nil {
-			http.Error(rsp, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		username.Debug = *debug
-		username.AllowSpaces = *spaces
-		username.AllowPunctuation = *punct
-
-		safe, err := username.Translate(scrubbed)
-
-		if err != nil {
-			http.Error(rsp, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		b := []byte(safe)
-
-		rsp.Header().Set("Content-Type", "text/plain")
-		rsp.Header().Set("Content-Length", strconv.Itoa(len(b)))
-
-		rsp.Write(b)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	address := fmt.Sprintf("%s:%d", *host, *port)
 	log.Println("listening on", address)
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", handler)
+	mux := gohttp.NewServeMux()
+	mux.Handle("/", handler)
 
-	err := gracehttp.Serve(&http.Server{Addr: address, Handler: mux})
+	err = gohttp.ListenAndServe(address, mux)
 
 	if err != nil {
 		log.Fatal(err)
