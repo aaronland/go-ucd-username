@@ -17,7 +17,7 @@ rmdeps:
 build:	fmt bin
 
 deps:	rmdeps
-	@GOPATH=$(GOPATH) go get -u "github.com/cooperhewitt/go-ucd"
+	@GOPATH=$(GOPATH) go get -u "github.com/aaronland/go-ucd"
 	@GOPATH=$(GOPATH) go get -u "github.com/whosonfirst/go-sanitize"
 
 vendor-deps: rmdeps deps
