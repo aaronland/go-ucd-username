@@ -19,6 +19,8 @@ build:	fmt bin
 deps:	rmdeps
 	@GOPATH=$(GOPATH) go get -u "github.com/aaronland/go-ucd"
 	@GOPATH=$(GOPATH) go get -u "github.com/whosonfirst/go-sanitize"
+	rm -rf src/github.com/cooperhewitt/go-ucd
+	mv src/github.com/aaronland/go-ucd src/github.com/cooperhewitt/
 
 vendor-deps: rmdeps deps
 	if test ! -d vendor; then mkdir vendor; fi
