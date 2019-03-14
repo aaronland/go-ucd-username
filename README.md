@@ -257,6 +257,6 @@ shrug
 
 ## See also
 
-* https://github.com/cooperhewitt/go-ucd
+* https://github.com/aaronland/go-ucd
 * https://github.com/whosonfirst/go-sanitize
 * https://emojipedia.org/shrug/
