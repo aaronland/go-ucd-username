@@ -261,7 +261,9 @@ Yes. See the [ucd-wasm.go](cmd/ucd-wasm.go) tool for details. It depends on Go `
 
 ![](docs/ucd-wasm.png)
 
-There is a pre-built sample application in the [www](/www) directory.
+There is a pre-built sample application in the [www](/www) directory. You can also try a live version here:
+
+https://aaronland.github.io/go-ucd-username/
 
 ## See also
 
