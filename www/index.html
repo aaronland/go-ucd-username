@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>UCD username</title>
+  </head>
+
+  <body>
+    <script src="wasm_exec.js"></script>
+
+    <script>
+     
+     if (! WebAssembly.instantiateStreaming){
+	 
+         WebAssembly.instantiateStreaming = async (resp, importObject) => {
+             const source = await (await resp).arrayBuffer();
+             return await WebAssembly.instantiate(source, importObject);
+         };
+     }
+
+      const go = new Go();
+
+      let mod, inst;
+
+     WebAssembly.instantiateStreaming(fetch("ucd.wasm"), go.importObject).then(
+	 
+          async result => {
+              mod = result.module;
+              inst = result.instance;
+	      await go.run(inst);
+              document.getElementById("runButton").disabled = false;
+          }
+      );
+
+     async function run() {
+
+	 var u = document.getElementById("username");
+	 var safe;
+	 
+	 console.log("UCD", username(u.value), safe);
+     }
+     
+    </script>
+
+    <input type="text" name="username" id="username" placeholder="..." />
+    <button onClick="run();" id="runButton">Run</button>
+
+    <div id="safe">...</div>
+  </body>
+</html>

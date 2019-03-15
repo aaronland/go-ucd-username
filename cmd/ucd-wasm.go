@@ -17,7 +17,7 @@ func init() {
 	}
 
 	username = u
-	
+
 	username.Debug = true
 	username.AllowSpaces = false
 	username.AllowPunctuation = false
@@ -29,11 +29,12 @@ func ucd_username(raw []js.Value) {
 	safe, err := username.Translate(pretty)
 
 	if err != nil {
-		log.Println(err)
-		return
+		log.Fatal(err)
 	}
 	
-	js.Global().Set("username", safe)
+	js.Global().Get("document").
+		Call("getElementById", "safe").
+		Set("innerText", safe)
 }
 
 func registerCallbacks() {
@@ -41,7 +42,7 @@ func registerCallbacks() {
 }
 
 func main() {
-	
+
 	c := make(chan struct{}, 0)
 
 	log.Println("WASM Go Initialized")
