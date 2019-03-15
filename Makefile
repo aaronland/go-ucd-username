@@ -38,6 +38,9 @@ bin: 	self
 	@GOPATH=$(GOPATH) go build -o bin/ucd-username cmd/ucd-username.go
 	@GOPATH=$(GOPATH) go build -o bin/ucd-usernamed cmd/ucd-usernamed.go
 
+wasm:   self
+	@GOPATH=$(GOPATH) GOARCH=wasm GOOS=js go build -o www/ucd.wasm cmd/ucd-wasm.go
+
 docker-build:
 	docker build -t ucd-username .
 
