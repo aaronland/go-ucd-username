@@ -26,22 +26,22 @@ func init() {
 
 func main() {
 
-	ucd_username = js.FuncOf(func(this js.Value, args []js.Value) interface{} {	
+	ucd_username = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 
-		pretty := args[0].String()
-		
-		safe, err := username.Translate(pretty)
+		raw := args[0].String()
+
+		safe, err := username.Translate(raw)
 
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Failed to translate '%s' because: %s\n", raw, err)
+			return nil
 		}
 
-		// js.Global().Set("safe", safe)
 		return safe
 	})
 
 	defer ucd_username.Release()
-	
+
 	js.Global().Set("username", ucd_username)
 
 	c := make(chan struct{}, 0)
