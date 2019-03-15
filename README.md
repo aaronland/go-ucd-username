@@ -255,6 +255,14 @@ curl 'localhost:6161?username=\U+01F937'
 shrug
 ```
 
+## WASM
+
+Yes. See the [ucd-wasm.go](cmd/ucd-wasm.go) tool for details. It depends on Go `1.12` or higher to build.
+
+![](docs/ucd-wasm.png)
+
+There is a pre-built sample application in the [www](/www) directory.
+
 ## See also
 
 * https://github.com/aaronland/go-ucd
