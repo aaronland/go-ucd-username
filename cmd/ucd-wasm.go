@@ -26,28 +26,24 @@ func init() {
 
 func main() {
 
-	ucd_username = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+	ucd_username = js.FuncOf(func(this js.Value, args []js.Value) interface{} {	
 
-		defer ucd_username.Release()
-		
 		pretty := args[0].String()
-		safe, err := username.Translate(pretty)
 		
+		safe, err := username.Translate(pretty)
+
 		if err != nil {
 			log.Fatal(err)
 		}
-		
-		js.Global().Set("debug", safe)
-		
-		js.Global().Get("document").
-			Call("getElementById", "safe").
-			Set("innerText", safe)
-		
-		return nil
+
+		// js.Global().Set("safe", safe)
+		return safe
 	})
 
-	// js.Global().Set("username", ucd_username)
+	defer ucd_username.Release()
 	
+	js.Global().Set("username", ucd_username)
+
 	c := make(chan struct{}, 0)
 
 	log.Println("WASM Go Initialized")

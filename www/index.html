@@ -2,9 +2,6 @@
   <head>
     <meta charset="utf-8" />
     <title>UCD username</title>
-  </head>
-
-  <body>
     <script src="wasm_exec.js"></script>
 
     <script>
@@ -17,8 +14,6 @@
          };
      }
 
-     var debug;
-     
       const go = new Go();
 
       let mod, inst;
@@ -33,19 +28,68 @@
           }
       );
 
-     async function run() {
+     async function run_ucd() {
 
-	 var u = document.getElementById("raw");
-	 username(u.value);
+	 set_feedback();
 	 
-	 console.log("UCD", debug);
+	 var u = document.getElementById("raw");
+	 var raw = u.value;
+
+	 if (! raw) {
+	     err("Missing anything to convert");
+	     return;
+	 }
+	 
+	 var safe = username(raw);
+
+	 if (! safe){
+	     err("UCD conversion failed");
+	     return;
+	 }
+
+	 var code = document.createElement("code");
+	 code.appendChild(document.createTextNode(safe));
+	 
+	 var span = document.createElement("span");
+	 span.appendChild(document.createTextNode("UCD username is "));
+	 span.appendChild(code);
+
+	 set_feedback(span);
+     }
+
+     function err(msg){
+	 var span = document.createElement("span");
+	 span.appendChild(document.createTextNode(msg));
+	 set_feedback(span);
+     }
+     
+     function set_feedback(msg) {
+	 
+	 var el = document.getElementById("feedback");
+	 el.innerHTML = "";
+
+	 if (msg){
+	     el.appendChild(msg);
+	 }
      }
      
     </script>
 
-    <input type="text" name="raw" id="raw" placeholder="..." />
-    <button onClick="run();" id="runButton">Run</button>
+    <style type="text/css">
+     code { color: red; }
+     #feedback {
+	     margin-top:1rem;
+     }
+    </style>
+  </head>
 
-    <div id="safe">...</div>
+  <body>
+
+    <h1>UCD Username converter</h1>
+    
+    <input type="text" name="raw" id="raw" placeholder="Enter a username to convert" />
+    <button onClick="run_ucd();">Convert</button>
+
+    <div id="feedback"></div>
   </body>
 </html>
