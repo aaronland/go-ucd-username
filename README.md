@@ -257,7 +257,7 @@ shrug
 
 ## WASM
 
-Yes. See the [ucd-wasm.go](cmd/ucd-wasm.go) tool for details. It depends on Go `1.12` or higher to build. It also explicitly disallows space or punctuation in usernames. That could/should be modified to check input variables (in JavaScript-land) but today it does not.
+Yes. See the [ucd-wasm.go](cmd/ucd-wasm.go) tool for details. It depends on Go `1.12` or higher to build. (Remember: All the [WASM stuff](https://golang.org/pkg/syscall/js/) in Go is still considered experimental.) It also explicitly disallows space or punctuation in when converting usernames. That could/should be modified to check input variables (in JavaScript-land) but today it does not.
 
 ![](docs/ucd-wasm.png)
 
