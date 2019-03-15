@@ -7,6 +7,7 @@ import (
 )
 
 var username *ucd.UCDUsername
+var ucd_username js.Func
 
 func init() {
 
@@ -23,29 +24,32 @@ func init() {
 	username.AllowPunctuation = false
 }
 
-func ucd_username(raw []js.Value) {
-
-	pretty := raw[0].String()
-	safe, err := username.Translate(pretty)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-	
-	js.Global().Get("document").
-		Call("getElementById", "safe").
-		Set("innerText", safe)
-}
-
-func registerCallbacks() {
-	js.Global().Set("username", js.NewCallback(ucd_username))
-}
-
 func main() {
 
+	ucd_username = js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+
+		defer ucd_username.Release()
+		
+		pretty := args[0].String()
+		safe, err := username.Translate(pretty)
+		
+		if err != nil {
+			log.Fatal(err)
+		}
+		
+		js.Global().Set("debug", safe)
+		
+		js.Global().Get("document").
+			Call("getElementById", "safe").
+			Set("innerText", safe)
+		
+		return nil
+	})
+
+	// js.Global().Set("username", ucd_username)
+	
 	c := make(chan struct{}, 0)
 
 	log.Println("WASM Go Initialized")
-	registerCallbacks()
 	<-c
 }

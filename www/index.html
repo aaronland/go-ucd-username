@@ -17,6 +17,8 @@
          };
      }
 
+     var debug;
+     
       const go = new Go();
 
       let mod, inst;
@@ -33,15 +35,15 @@
 
      async function run() {
 
-	 var u = document.getElementById("username");
-	 var safe;
+	 var u = document.getElementById("raw");
+	 username(u.value);
 	 
-	 console.log("UCD", username(u.value), safe);
+	 console.log("UCD", debug);
      }
      
     </script>
 
-    <input type="text" name="username" id="username" placeholder="..." />
+    <input type="text" name="raw" id="raw" placeholder="..." />
     <button onClick="run();" id="runButton">Run</button>
 
     <div id="safe">...</div>
