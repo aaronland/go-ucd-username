@@ -1,7 +1,7 @@
 package http
 
 import (
-	"github.com/thisisaaronland/go-ucd-username"
+	"github.com/aaronland/go-ucd-username"
 	"github.com/whosonfirst/go-sanitize"
 	gohttp "net/http"
 	"strconv"
@@ -15,15 +15,15 @@ type UCDUsernameHandlerOptions struct {
 
 func UCDUsernameHandler(opts UCDUsernameHandlerOptions) (gohttp.Handler, error) {
 
-	username, err := ucd.NewUCDUsername()
+	uname, err := username.NewUCDUsername()
 
 	if err != nil {
 		return nil, err
 	}
 
-	username.Debug = opts.Debug
-	username.AllowSpaces = opts.AllowSpaces
-	username.AllowPunctuation = opts.AllowPunctuation
+	uname.Debug = opts.Debug
+	uname.AllowSpaces = opts.AllowSpaces
+	uname.AllowPunctuation = opts.AllowPunctuation
 
 	fn := func(rsp gohttp.ResponseWriter, req *gohttp.Request) {
 
@@ -49,7 +49,7 @@ func UCDUsernameHandler(opts UCDUsernameHandlerOptions) (gohttp.Handler, error) 
 			return
 		}
 
-		safe, err := username.Translate(scrubbed)
+		safe, err := uname.Translate(scrubbed)
 
 		if err != nil {
 			gohttp.Error(rsp, err.Error(), gohttp.StatusInternalServerError)

@@ -134,7 +134,7 @@ While it's true that an [Internalized Resource Identifier](https://en.wikipedia.
 So long as you already have [Go](http://www.golang.org) (and `make`) installed you should be able to simply type:
 
 ```
-make bin
+make tools
 ```
 
 All of the dependencies are included in the [vendor](vendor) directory. If you don't have `make` installed you can get started by executing the relevant commands in the [Makefile](Makefile).
@@ -147,7 +147,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/thisisaaronland/go-ucd-username"
+	"github.com/aaronland/go-ucd-username"
 	"log"
 	"os"
 	"strings"
@@ -164,17 +164,17 @@ func main() {
 
 	pretty := strings.Join(args, " ")
 
-	username, err := ucd.NewUCDUsername()
+	uname, err := username.NewUCDUsername()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	username.Debug = *debug
-	username.AllowSpaces = *spaces
-	username.AllowPunctuation = *punct
+	uname.Debug = *debug
+	uname.AllowSpaces = *spaces
+	uname.AllowPunctuation = *punct
 
-	safe, err := username.Translate(pretty)
+	safe, err := uname.Translate(pretty)
 
 	if err != nil {
 		log.Fatal(err)

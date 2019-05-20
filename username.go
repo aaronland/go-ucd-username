@@ -1,8 +1,8 @@
-package ucd
+package username
 
 import (
 	"errors"
-	goucd "github.com/cooperhewitt/go-ucd"
+	"github.com/aaronland/go-ucd"
 	"github.com/whosonfirst/go-sanitize"
 	"log"
 	"regexp"
@@ -93,7 +93,7 @@ func (u *UCDUsername) Translate(raw string) (string, error) {
 			log.Printf("RUNE %d %#U is not whitelisted\tPROCESSING\n", i, r)
 		}
 
-		name := goucd.Name(char)
+		name := ucd.Name(char)
 
 		if name.Name == "" {
 			return "", errors.New("Totally crazy-pants character!")

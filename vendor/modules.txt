@@ -1,0 +1,7 @@
+# github.com/aaronland/go-ucd v0.0.0-20190520134908-684059ca9156
+github.com/aaronland/go-ucd
+# github.com/cooperhewitt/go-ucd v0.0.0-20170323200852-c4101e1ef9a6
+github.com/cooperhewitt/go-ucd/unicodedata
+github.com/cooperhewitt/go-ucd/unihan
+# github.com/whosonfirst/go-sanitize v0.1.0
+github.com/whosonfirst/go-sanitize
