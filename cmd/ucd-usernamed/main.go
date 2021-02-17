@@ -11,9 +11,11 @@ mrgrinningfacewithsmilingeyes
 */
 
 import (
+	"context"
 	"flag"
 	"fmt"
-	"github.com/aaronland/go-ucd-username/http"
+	"github.com/aaronland/go-ucd-username/http"	
+	"github.com/aaronland/go-http-server"
 	"log"
 	gohttp "net/http"
 	"os"
@@ -21,37 +23,50 @@ import (
 
 func main() {
 
-	var host = flag.String("host", "localhost", "What host to bind ucd-usernamed to")
-	var port = flag.Int("port", 8080, "What port to bind ucd-usernamed to")
+	host := flag.String("host", "localhost", "What host to bind ucd-usernamed to. This flag is DEPRECATED. Please use -server-uri instead.")
+	port := flag.Int("port", 8080, "What port to bind ucd-usernamed to. This flag is DEPRECATED. Please use -server-uri instead.")
 
-	var spaces = flag.Bool("spaces", false, "Do not filter out whitespace during processing")
-	var punct = flag.Bool("punct", false, "Do not filter out punctuation during processing")
-	var debug = flag.Bool("debug", false, "Enable verbose logging during processing")
+	server_uri := flag.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server URI.")
+	
+	spaces := flag.Bool("spaces", false, "Do not filter out whitespace during processing")
+	punct := flag.Bool("punct", false, "Do not filter out punctuation during processing")
+	debug := flag.Bool("debug", false, "Enable verbose logging during processing")
 
 	flag.Parse()
 
+	if *server_uri == "" {
+		*server_uri = fmt.Sprintf("http://%s:%d", *host, *port)
+	}
+	
 	opts := http.UCDUsernameHandlerOptions{
 		Debug:            *debug,
 		AllowSpaces:      *spaces,
 		AllowPunctuation: *punct,
 	}
 
-	handler, err := http.UCDUsernameHandler(opts)
+	ucd_handler, err := http.UCDUsernameHandler(opts)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	address := fmt.Sprintf("%s:%d", *host, *port)
-	log.Println("listening on", address)
+	ctx := context.Background()
 
-	mux := gohttp.NewServeMux()
-	mux.Handle("/", handler)
-
-	err = gohttp.ListenAndServe(address, mux)
+	s, err := server.NewServer(ctx, *server_uri)
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Unable to create server (%s), %v", *server_uri, err)
+	}
+
+	mux := gohttp.NewServeMux()
+	mux.Handle("/", ucd_handler)
+
+	log.Printf("Listening on %s", s.Address())
+
+	err = s.ListenAndServe(ctx, mux)
+
+	if err != nil {
+		log.Fatalf("Failed to start server, %v", err)
 	}
 
 	os.Exit(0)

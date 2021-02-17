@@ -226,16 +226,16 @@ Usage of ./bin/ucd-usernamed:
 For example:
 
 ```
-./bin/ucd-usernamed -port 8081
-2017/04/07 18:02:51 listening on localhost:8081
+./bin/ucd-usernamed -port 8080
+2017/04/07 18:02:51 listening on localhost:8080
 ```
 
 And then:
 
 ```
-# as in: http://localhost:8081?username=mr. 😁
+# as in: http://localhost:8080?username=mr. 😁
 
-$> curl -s -i 'http://localhost:8081?username=mr.+%F0%9F%98%81'
+$> curl -s -i 'http://localhost:8080?username=mr.+%F0%9F%98%81'
 HTTP/1.1 200 OK
 Content-Length: 29
 Content-Type: text/plain
