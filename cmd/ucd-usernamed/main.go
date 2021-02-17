@@ -12,10 +12,10 @@ mrgrinningfacewithsmilingeyes
 
 import (
 	"context"
-	"flag"
 	"fmt"
-	"github.com/aaronland/go-ucd-username/http"	
 	"github.com/aaronland/go-http-server"
+	"github.com/aaronland/go-ucd-username/http"
+	"github.com/sfomuseum/go-flags/flagset"
 	"log"
 	gohttp "net/http"
 	"os"
@@ -23,21 +23,31 @@ import (
 
 func main() {
 
-	host := flag.String("host", "localhost", "What host to bind ucd-usernamed to. This flag is DEPRECATED. Please use -server-uri instead.")
-	port := flag.Int("port", 8080, "What port to bind ucd-usernamed to. This flag is DEPRECATED. Please use -server-uri instead.")
+	fs := flagset.NewFlagSet("ucd")
 
-	server_uri := flag.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server URI.")
-	
-	spaces := flag.Bool("spaces", false, "Do not filter out whitespace during processing")
-	punct := flag.Bool("punct", false, "Do not filter out punctuation during processing")
-	debug := flag.Bool("debug", false, "Enable verbose logging during processing")
+	host := fs.String("host", "localhost", "What host to bind ucd-usernamed to. This fs is DEPRECATED. Please use -server-uri instead.")
+	port := fs.Int("port", 8080, "What port to bind ucd-usernamed to. This fs is DEPRECATED. Please use -server-uri instead.")
 
-	flag.Parse()
+	server_uri := fs.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server URI.")
+
+	spaces := fs.Bool("spaces", false, "Do not filter out whitespace during processing")
+	punct := fs.Bool("punct", false, "Do not filter out punctuation during processing")
+	debug := fs.Bool("debug", false, "Enable verbose logging during processing")
+
+	flagset.Parse(fs)
+
+	ctx := context.Background()
+
+	err := flagset.SetFlagsFromEnvVarsWithFeedback(fs, "UCD", false)
+
+	if err != nil {
+		log.Fatalf("Failed to set flags from environment variables, %v", err)
+	}
 
 	if *server_uri == "" {
 		*server_uri = fmt.Sprintf("http://%s:%d", *host, *port)
 	}
-	
+
 	opts := http.UCDUsernameHandlerOptions{
 		Debug:            *debug,
 		AllowSpaces:      *spaces,
@@ -49,8 +59,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	ctx := context.Background()
 
 	s, err := server.NewServer(ctx, *server_uri)
 

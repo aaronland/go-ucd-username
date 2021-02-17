@@ -14,6 +14,8 @@ github.com/cooperhewitt/go-ucd v0.0.0-20170323200852-c4101e1ef9a6 h1:P3t+wrVJz+C
 github.com/cooperhewitt/go-ucd v0.0.0-20170323200852-c4101e1ef9a6/go.mod h1:76WUZ+6G1smA8yhoi9mNx95mpMvIPIpeEDAZrEFRK30=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/sfomuseum/go-flags v0.7.0 h1:tj0BhAEhc7enIA0kuLjVNrVkqiUelX5jQkyL/A0cNAo=
+github.com/sfomuseum/go-flags v0.7.0/go.mod h1:ML3DTNbF9xnjExSdS/9FtVLjIUhRU5gm/ehzISv+t2w=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/thisisaaronland/go-ucd-username v0.0.0-20190315180331-ef0691f5cf62 h1:fFjfThBucv67zBEh28KvYHwVNwIiPbvjZORo8SoB+q0=
