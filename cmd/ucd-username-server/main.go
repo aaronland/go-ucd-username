@@ -1,7 +1,7 @@
 package main
 
 /*
-curl -s -i 'http://localhost:8081?username=mr.+%F0%9F%98%81'
+curl -s -i 'http://localhost:8080/api?username=mr.+%F0%9F%98%81'
 HTTP/1.1 200 OK
 Content-Length: 29
 Content-Type: text/plain
@@ -37,6 +37,15 @@ func main() {
 
 	enable_api := fs.Bool("enable-api", true, "Enable the /api endpoint")
 	enable_www := fs.Bool("enable-www", true, "Enable the / endpoint")
+
+	fs.Usage = func() {
+
+		fmt.Fprintf(os.Stderr, "HTTP server exposing the ucd-username functionality.\n\n")
+		fmt.Fprintf(os.Stderr, "Usage:\n\t %s [options] \n\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "For example:\n\t%s\n\t2021/02/17 08:55:00 Listening on http://localhost:8080\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "\nValid options are:\n")
+		fs.PrintDefaults()
+	}
 
 	flagset.Parse(fs)
 

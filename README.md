@@ -129,16 +129,6 @@ While it's true that an [Internalized Resource Identifier](https://en.wikipedia.
 
 `go-ucd-username` side-steps all those issues and allows for a better-than-nothing alternative.
 
-## Install
-
-So long as you already have [Go](http://www.golang.org) (and `make`) installed you should be able to simply type:
-
-```
-make tools
-```
-
-All of the dependencies are included in the [vendor](vendor) directory. If you don't have `make` installed you can get started by executing the relevant commands in the [Makefile](Makefile).
-
 ## Usage
 
 ```
@@ -187,16 +177,35 @@ func main() {
 
 ## Tools
 
+```
+> make cli
+GOARCH=wasm GOOS=js go build -mod vendor -o http/wasm/ucd.wasm cmd/ucd-wasm/main.go
+go build -mod vendor -o bin/ucd-username cmd/ucd-username/main.go
+go build -mod vendor -o bin/ucd-username-server cmd/ucd-username-server/main.go
+```
+
 ### ucd-username
 
+Command line tool for converting strings in to valid UCD usernames.
+
 ```
-Usage of ./bin/ucd-username:
+$> ./bin/ucd-username -h
+Command line tool for converting strings in to valid UCD usernames.
+
+Usage:
+	 ./bin/ucd-username [options] string(N) string(N) string(N)
+
+For example:
+	./bin/ucd-username captain 🧍 ✨ 
+	aptainastandingpersonsarkles
+
+Valid options are:
   -debug
-	Enable verbose logging during processing
+    	Enable verbose logging during processing
   -punct
-	Do not filter out punctuation during processing
+    	Do not filter out punctuation during processing
   -spaces
-	Do not filter out whitespace during processing
+    	Do not filter out whitespace during processing
 ```
 
 For example:
@@ -208,17 +217,34 @@ mrgrinningfacewithsmilingeyes
 
 ### ucd-username-server
 
+HTTP server exposing the ucd-username functionality.
+
 ```
-./bin/ucd-username-server -h
-Usage of ./bin/ucd-username-server:
+$> ./bin/ucd-username-server -h
+HTTP server exposing the ucd-username functionality.
+
+Usage:
+	 ./bin/ucd-username-server [options] 
+
+For example:
+	./bin/ucd-username-server
+	2021/02/17 08:55:00 Listening on http://localhost:8080
+
+Valid options are:
   -debug
     	Enable verbose logging during processing
+  -enable-api
+    	Enable the /api endpoint (default true)
+  -enable-www
+    	Enable the / endpoint (default true)
   -host string
-    	What host to bind ucd-username-server to (default "localhost")
+    	What host to bind ucd-username-server to. This fs is DEPRECATED. Please use -server-uri instead. (default "localhost")
   -port int
-    	What port to bind ucd-username-server to (default 8080)
+    	What port to bind ucd-username-server to. This fs is DEPRECATED. Please use -server-uri instead. (default 8080)
   -punct
     	Do not filter out punctuation during processing
+  -server-uri string
+    	A valid aaronland/go-http-server URI. (default "http://localhost:8080")
   -spaces
     	Do not filter out whitespace during processing
 ```
@@ -243,6 +269,15 @@ Date: Sat, 08 Apr 2017 01:02:58 GMT
 
 mrgrinningfacewithsmilingeyes
 ```
+
+### WASM
+
+The [ucd-wasm.go](cmd/ucd-wasm.go) tool exports the `ucd-username` functionality was a [WebAssembly](#) binary. This binary is bundled with the `ucd-username-server` application and is exposed on the `/` endpoint, assuming the `-enable-www` flag is true.
+
+As of this writing space and punctuation are explicitly disallowed when converting usernames. That could/should be modified to check input variables (in JavaScript-land) but today it does not.
+
+![](docs/ucd-wasm.png)
+
 ## Docker
 
 [Yes](Dockerfile).
@@ -254,18 +289,6 @@ docker run -p 6161:8080 -e HOST='0.0.0.0' ucd-username
 curl 'localhost:6161?/apiusername=\U+01F937'
 shrug
 ```
-
-## WASM
-
-Yes. See the [ucd-wasm.go](cmd/ucd-wasm.go) tool for details. It depends on Go `1.12` or higher to build. Remember: All the [WASM stuff](https://golang.org/pkg/syscall/js/) in Go is still considered experimental.
-
-As of this writing space and punctuation are explicitly disallowed when converting usernames. That could/should be modified to check input variables (in JavaScript-land) but today it does not.
-
-![](docs/ucd-wasm.png)
-
-There is a pre-built sample application in the [www](/www) directory. You can also try a live version here:
-
-https://aaronland.github.io/go-ucd-username/
 
 ## Versions
 
