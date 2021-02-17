@@ -272,7 +272,7 @@ mrgrinningfacewithsmilingeyes
 
 ### WASM
 
-The [ucd-wasm.go](cmd/ucd-wasm.go) tool exports the `ucd-username` functionality was a [WebAssembly](#) binary. This binary is bundled with the `ucd-username-server` application and is exposed on the `/` endpoint, assuming the `-enable-www` flag is true.
+The [ucd-wasm.go](cmd/ucd-wasm.go) tool exports the `ucd-username` functionality was a [WebAssembly](https://webassembly.org/) binary. This binary is bundled with the `ucd-username-server` application and is exposed on the `/` endpoint, assuming the `-enable-www` flag is true.
 
 As of this writing space and punctuation are explicitly disallowed when converting usernames. That could/should be modified to check input variables (in JavaScript-land) but today it does not.
 
