@@ -206,17 +206,17 @@ For example:
 mrgrinningfacewithsmilingeyes
 ```
 
-### ucd-usernamed
+### ucd-username-server
 
 ```
-./bin/ucd-usernamed -h
-Usage of ./bin/ucd-usernamed:
+./bin/ucd-username-server -h
+Usage of ./bin/ucd-username-server:
   -debug
     	Enable verbose logging during processing
   -host string
-    	What host to bind ucd-usernamed to (default "localhost")
+    	What host to bind ucd-username-server to (default "localhost")
   -port int
-    	What port to bind ucd-usernamed to (default 8080)
+    	What port to bind ucd-username-server to (default 8080)
   -punct
     	Do not filter out punctuation during processing
   -spaces
@@ -226,7 +226,7 @@ Usage of ./bin/ucd-usernamed:
 For example:
 
 ```
-./bin/ucd-usernamed -port 8080
+./bin/ucd-username-server -port 8080
 2017/04/07 18:02:51 listening on localhost:8080
 ```
 
@@ -235,7 +235,7 @@ And then:
 ```
 # as in: http://localhost:8080?username=mr. 😁
 
-$> curl -s -i 'http://localhost:8080?username=mr.+%F0%9F%98%81'
+$> curl -s -i 'http://localhost:8080/api?username=mr.+%F0%9F%98%81'
 HTTP/1.1 200 OK
 Content-Length: 29
 Content-Type: text/plain
@@ -251,7 +251,7 @@ mrgrinningfacewithsmilingeyes
 docker build -t ucd-username .
 docker run -p 6161:8080 -e HOST='0.0.0.0' ucd-username
 
-curl 'localhost:6161?username=\U+01F937'
+curl 'localhost:6161?/apiusername=\U+01F937'
 shrug
 ```
 

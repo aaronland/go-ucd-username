@@ -1,4 +1,4 @@
-package http
+package api
 
 import (
 	"github.com/aaronland/go-ucd-username"
@@ -7,13 +7,13 @@ import (
 	"strconv"
 )
 
-type UCDUsernameHandlerOptions struct {
+type UCDUsernameAPIHandlerOptions struct {
 	Debug            bool
 	AllowSpaces      bool
 	AllowPunctuation bool
 }
 
-func UCDUsernameHandler(opts UCDUsernameHandlerOptions) (gohttp.Handler, error) {
+func UCDUsernameAPIHandler(opts UCDUsernameAPIHandlerOptions) (gohttp.Handler, error) {
 
 	uname, err := username.NewUCDUsername()
 
