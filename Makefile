@@ -1,14 +1,9 @@
-fmt:
-	go fmt *.go
-	go fmt cmd/*.go
-	go fmt http/*.go
-
-tools: 	
-	go build -o bin/ucd-username cmd/ucd-username/main.go
-	go build -o bin/ucd-usernamed cmd/ucd-usernamed/main.go
+cli: 	
+	go build -mod vendor -o bin/ucd-username cmd/ucd-username/main.go
+	go build -mod vendor -o bin/ucd-usernamed cmd/ucd-usernamed/main.go
 
 wasm:   
-	GOARCH=wasm GOOS=js go build -o www/ucd.wasm cmd/ucd-wasm/main.go
+	GOARCH=wasm GOOS=js go build -mod vendor -o www/ucd.wasm cmd/ucd-wasm/main.go
 
 docker-build:
 	docker build -t ucd-username .

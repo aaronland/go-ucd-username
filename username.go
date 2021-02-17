@@ -2,7 +2,7 @@ package username
 
 import (
 	"errors"
-	"github.com/aaronland/go-ucd"
+	"github.com/aaronland/go-ucd/v13"
 	"github.com/whosonfirst/go-sanitize"
 	"log"
 	"regexp"
