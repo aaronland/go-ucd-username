@@ -267,6 +267,10 @@ There is a pre-built sample application in the [www](/www) directory. You can al
 
 https://aaronland.github.io/go-ucd-username/
 
+## Versions
+
+`go-ucd-username` supports Unicode 13.0 (specifically [aaronland/go-ucd/v13](https://github.com/aaronland/go-ucd) as of February, 2021 and requires Go [1.16](https://golang.org/doc/go1.16) or higher to compile.
+
 ## See also
 
 * https://github.com/aaronland/go-ucd
