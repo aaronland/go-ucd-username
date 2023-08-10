@@ -2,12 +2,13 @@ package username
 
 import (
 	"errors"
-	"github.com/aaronland/go-ucd/v13"
-	"github.com/whosonfirst/go-sanitize"
 	"log"
 	"regexp"
 	"strings"
 	"unicode"
+
+	"github.com/aaronland/go-ucd/v15"
+	"github.com/whosonfirst/go-sanitize"	
 )
 
 var re_allowed *regexp.Regexp

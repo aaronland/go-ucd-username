@@ -13,13 +13,14 @@ mrgrinningfacewithsmilingeyes
 import (
 	"context"
 	"fmt"
-	"github.com/aaronland/go-http-server"
-	"github.com/aaronland/go-ucd-username/http/api"
-	"github.com/aaronland/go-ucd-username/http/wasm"
-	"github.com/sfomuseum/go-flags/flagset"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/aaronland/go-http-server"
+	"github.com/aaronland/go-ucd-username/http/api"
+	"github.com/aaronland/go-ucd-username/http/wasm"
+	"github.com/sfomuseum/go-flags/flagset"	
 )
 
 func main() {

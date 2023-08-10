@@ -1,10 +1,12 @@
+GOMOD=$(shell test -f "go.work" && echo "readonly" || echo "vendor")
+
 cli:
 	@make wasm
-	go build -mod vendor -o bin/ucd-username cmd/ucd-username/main.go
-	go build -mod vendor -o bin/ucd-username-server cmd/ucd-username-server/main.go
+	go build -mod $(GOMOD) -ldflags="-s -w" -o bin/ucd-username cmd/ucd-username/main.go
+	go build -mod $(GOMOD) -ldflags="-s -w" -o bin/ucd-username-server cmd/ucd-username-server/main.go
 
 wasm:   
-	GOARCH=wasm GOOS=js go build -mod vendor -o http/wasm/ucd.wasm cmd/ucd-wasm/main.go
+	GOARCH=wasm GOOS=js go build -mod $(GOMOD) -ldflags="-s -w" -o http/wasm/ucd.wasm cmd/ucd-wasm/main.go
 
 docker-build:
 	docker build -t ucd-username .

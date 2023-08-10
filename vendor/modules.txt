@@ -1,24 +1,27 @@
-# github.com/aaronland/go-http-server v0.0.5
-## explicit
+# github.com/aaronland/go-http-server v1.2.0
+## explicit; go 1.18
 github.com/aaronland/go-http-server
-# github.com/aaronland/go-roster v0.0.2
+# github.com/aaronland/go-roster v1.0.0
+## explicit; go 1.16
 github.com/aaronland/go-roster
-# github.com/aaronland/go-ucd/v13 v13.0.0
-## explicit
-github.com/aaronland/go-ucd/v13
-github.com/aaronland/go-ucd/v13/unicodedata
-github.com/aaronland/go-ucd/v13/unihan
-# github.com/aws/aws-lambda-go v1.10.0
+# github.com/aaronland/go-ucd/v15 v15.0.0
+## explicit; go 1.21.0
+github.com/aaronland/go-ucd/v15
+github.com/aaronland/go-ucd/v15/unicodedata
+github.com/aaronland/go-ucd/v15/unihan
+# github.com/akrylysov/algnhsa v1.0.0
+## explicit; go 1.18
+github.com/akrylysov/algnhsa
+# github.com/aws/aws-lambda-go v1.37.0
+## explicit; go 1.18
 github.com/aws/aws-lambda-go/events
 github.com/aws/aws-lambda-go/lambda
 github.com/aws/aws-lambda-go/lambda/handlertrace
 github.com/aws/aws-lambda-go/lambda/messages
 github.com/aws/aws-lambda-go/lambdacontext
-# github.com/sfomuseum/go-flags v0.7.0
-## explicit
+# github.com/sfomuseum/go-flags v0.10.0
+## explicit; go 1.16
 github.com/sfomuseum/go-flags/flagset
-# github.com/whosonfirst/algnhsa v0.1.0
-github.com/whosonfirst/algnhsa
 # github.com/whosonfirst/go-sanitize v0.1.0
-## explicit
+## explicit; go 1.12
 github.com/whosonfirst/go-sanitize

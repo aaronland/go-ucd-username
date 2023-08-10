@@ -292,7 +292,7 @@ shrug
 
 ## Versions
 
-`go-ucd-username` supports Unicode 13.0 (specifically [aaronland/go-ucd/v13](https://github.com/aaronland/go-ucd) as of February, 2021 and requires Go [1.16](https://golang.org/doc/go1.16) or higher to compile.
+`go-ucd-username` supports Unicode 15.0 (specifically [aaronland/go-ucd/v15](https://github.com/aaronland/go-ucd) as of August, 2023 and requires Go [1.21](https://go.dev/dl) or higher to compile.
 
 ## See also
 

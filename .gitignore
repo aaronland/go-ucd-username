@@ -7,3 +7,4 @@ bin/
 *.json
 .gitmodules
 vips-*
+.DS_Store
