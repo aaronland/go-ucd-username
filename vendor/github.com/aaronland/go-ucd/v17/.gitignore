@@ -1,0 +1,5 @@
+*~
+pkg
+src
+bin/ucd*
+.DS_Store

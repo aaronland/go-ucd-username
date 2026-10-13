@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/aaronland/go-ucd-username"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/aaronland/go-ucd-username"	
 )
 
 func main() {
