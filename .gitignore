@@ -1,9 +1,4 @@
-pkg/
-src/
-bin/
-!bin/README.md
+bin
+.DS_Store
+work
 *~
-!vendor/src
-*.json
-.gitmodules
-vips-*

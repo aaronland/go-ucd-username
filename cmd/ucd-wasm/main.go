@@ -1,9 +1,11 @@
+//go:build wasmjs
 package main
 
 import (
-	"github.com/aaronland/go-ucd-username"
 	"log"
 	"syscall/js"
+
+	"github.com/aaronland/go-ucd-username"	
 )
 
 var uname *username.UCDUsername
