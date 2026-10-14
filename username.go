@@ -8,7 +8,7 @@ import (
 	"unicode"
 
 	"github.com/aaronland/go-ucd/v17"
-	"github.com/whosonfirst/go-sanitize"	
+	"github.com/whosonfirst/go-sanitize"
 )
 
 var re_allowed *regexp.Regexp

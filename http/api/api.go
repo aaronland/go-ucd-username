@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/aaronland/go-ucd-username"
-	"github.com/whosonfirst/go-sanitize"	
+	"github.com/whosonfirst/go-sanitize"
 )
 
 type UCDUsernameAPIHandlerOptions struct {

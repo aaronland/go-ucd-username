@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/aaronland/go-ucd-username"	
+	"github.com/aaronland/go-ucd-username"
 )
 
 func main() {

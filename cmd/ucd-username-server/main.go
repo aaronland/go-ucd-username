@@ -20,7 +20,7 @@ import (
 	"github.com/aaronland/go-http/v4/server"
 	"github.com/aaronland/go-ucd-username/http/api"
 	"github.com/aaronland/go-ucd-username/http/wasm"
-	"github.com/sfomuseum/go-flags/flagset"	
+	"github.com/sfomuseum/go-flags/flagset"
 )
 
 func main() {
